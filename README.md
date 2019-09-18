@@ -1,2 +1,2 @@
 # Docker-example
-Dockerの技術獲得用
+Docker 技術獲得用
