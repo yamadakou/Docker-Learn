@@ -75,15 +75,13 @@ Server: Docker Engine - Community
  docker-init:
   Version:          0.18.0
   GitCommit:        fec3683
-
-c:\>
 ```
 
 ## Dockerの基本操作
-- Dockerドキュメント
-  - https://docs.docker.com/
+- Dockerドキュメント（基本コマンド）
+  - https://docs.docker.com/engine/reference/commandline/docker/
 
-###  Dockerイメージの検索/取得
+###  イメージの検索/取得
 #### docker search
 - [DockerHub](https://hub.docker.com/)に登録されたDockerイメージを検索する。
 - 例：RedisのDockerイメージを検索
@@ -115,8 +113,6 @@ runnable/redis-stunnel           stunnel to redis provided by linking contain…
 wodby/redis                      Redis container image with orchestration        1                                       [OK]
 xetamus/redis-resource           forked redis-resource                           0                                       [OK]
 cflondonservices/redis           Docker image for running redis                  0                                      
-
-c:\>
 ```
 - 1番目の「OFFICIAL」が「[OK]」となっており、Docker公式のRedis組込み済みイメージであることが分かる。
 
@@ -131,8 +127,6 @@ latest: Pulling from library/redis
 b8f262c62ec6: Pull complete                                                                                             93789b5343a5: Pull complete                                                                                             49cdbb315637: Pull complete                                                                                             2c1ff453e5c9: Pull complete                                                                                             9341ee0a5d4a: Pull complete                                                                                             770829e1df34: Pull complete                                                                                             Digest: sha256:5dcccb533dc0deacce4a02fe9035134576368452db0b4323b98a4b2ba2d3b302
 Status: Downloaded newer image for redis:latest
 docker.io/library/redis:latest
-
-c:\> 
 ```
 - バージョンを指定しないとデフォルトであるLatestバージョンを取得する。
 
@@ -160,8 +154,6 @@ k8s.gcr.io/k8s-dns-dnsmasq-nanny-amd64     1.14.8              c2ce1ffb51ed     
 k8s.gcr.io/k8s-dns-sidecar-amd64           1.14.8              6f7f2dc7fab5        20 months ago       42.2MB
 k8s.gcr.io/k8s-dns-kube-dns-amd64          1.14.8              80cc5ea4b547        20 months ago       50.5MB
 k8s.gcr.io/pause-amd64                     3.1                 da86e6ba6ca1        21 months ago       742kB
-
-c:\>
 ```
 - 取得したコンテナを確認できる。
 
@@ -181,8 +173,6 @@ c:\>
 ```
 c:\>docker run --name docker-redis -d -p 6379:6379 redis
 2c7b52aaf216d93cc9c727ce8294c80dba375edd53d55a2ac80de7fb238d2d08
-
-c:\>
 ```
 
 #### docker ps
@@ -193,8 +183,6 @@ c:\>
 c:\>docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
 2c7b52aaf216        redis               "docker-entrypoint.s…"   48 seconds ago      Up 47 seconds       0.0.0.0:6379->6379/tcp   docker-redis
-
-c:\> 
 ```
 - コンテナ起動時に指定した名前「docker-redis」でポート6379を使用して起動していることが分かる。
 - 任意のRedisクライアントで `localhost:6379` に接続すると、コンテナ上のRedisに対する操作が可能。
@@ -219,8 +207,6 @@ docker-redis
 
 c:\>docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-
-c:\>
 ```
 - `docker ps` で名前「docker-redis」のコンテナが停止したことが分かる。
 
@@ -239,8 +225,6 @@ docker-redis
 c:\>docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
 2c7b52aaf216        redis               "docker-entrypoint.s…"   27 minutes ago      Up 2 seconds        0.0.0.0:6379->6379/tcp   docker-redis
-
-c:\> 
 ```
 - `docker ps` で名前「docker-redis」のコンテナが起動したことが分かる。
 
@@ -250,6 +234,77 @@ c:\>
 - `docker kill` でDickerコンテナを強制停止して、
 - `docker start` でDickerコンテナを再起動して、
 - `docker ps` でDockerコンテナの稼働状況を確認する。
+
+### コンテナの削除・イメージの削除
+#### docker rm
+- 動作しているコンテナを確認
+```
+c:\>docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+```
+
+- 停止しているコンテナを確認
+```
+c:\>docker ps -a
+CONTAINER ID        IMAGE                                        COMMAND                  CREATED             STATUS                          PORTS               NAMES
+73aa6a0a9dc2        redis                                        "docker-entrypoint.s…"   12 hours ago        Exited (0) About a minute ago                       docker-redis
+1456069ce688        mcr.microsoft.com/mssql/server:2017-latest   "/opt/mssql/bin/sqls…"   6 months ago        Created                                             sql1
+```
+- コンテナの削除
+```
+c:\>docker rm docker-redis
+docker-redis
+
+c:\>docker ps -a
+CONTAINER ID        IMAGE                                        COMMAND                  CREATED             STATUS              PORTS               NAMES
+1456069ce688        mcr.microsoft.com/mssql/server:2017-latest   "/opt/mssql/bin/sqls…"   6 months ago        Created                                 sql1
+```
+- 削除した「docker-redis」のコンテナが、停止しているコンテナから削除されたことが分かる。
+
+#### docker rmi
+- 現在のコンテナとイメージの確認
+```
+c:\>docker ps -a
+CONTAINER ID        IMAGE                                        COMMAND                  CREATED             STATUS              PORTS               NAMES
+1456069ce688        mcr.microsoft.com/mssql/server:2017-latest   "/opt/mssql/bin/sqls…"   6 months ago        Created                                 sql1
+
+c:\>docker images
+REPOSITORY                       TAG                 IMAGE ID            CREATED             SIZE
+redis                            latest              63130206b0fa        7 days ago          98.2MB
+mcr.microsoft.com/mssql/server   2017-latest         314918ddaedf        9 months ago        1.35GB
+docker4w/nsenter-dockerd         latest              2f1c802f322f        11 months ago       187kB
+```
+- 「mcr.microsoft.com/mssql/server」のイメージを削除（してみる）
+```
+c:\>docker rmi 314918ddaedf
+Error response from daemon: conflict: unable to delete 314918ddaedf (must be forced) - image is being used by stopped container 1456069ce688
+```
+  - コンテナが使用している旨のエラーメッセージが表示され、削除できない。
+
+- 「redis」のイメージを削除
+```
+
+c:\>docker rmi redis
+Untagged: redis:latest
+Untagged: redis@sha256:5dcccb533dc0deacce4a02fe9035134576368452db0b4323b98a4b2ba2d3b302
+Deleted: sha256:63130206b0fa808e4545a0cb4a1f14f6d40b8a7e2e6fda0a31fd326c2ac0971c
+Deleted: sha256:9476758634326bb436208264d0541e9a0d42e4add35d00c2a7408f810223013d
+Deleted: sha256:0f3d9de16a216bfa5e2c2bd0e3c2ba83afec01a1b326d9f39a5ea7aecc112baf
+Deleted: sha256:452d665d4efca3e6067c89a332c878437d250312719f9ea8fff8c0e350b6e471
+Deleted: sha256:d6aec371927a9d4bfe4df4ee8e510624549fc08bc60871ce1f145997f49d4d37
+Deleted: sha256:2957e0a13c30e89650dd6c00644c04aa87ce516284c76a67c4b32cbb877de178
+Deleted: sha256:2db44bce66cde56fca25aeeb7d09dc924b748e3adfe58c9cc3eb2bd2f68a1b68
+
+c:\>docker images
+REPOSITORY                       TAG                 IMAGE ID            CREATED             SIZE
+mcr.microsoft.com/mssql/server   2017-latest         314918ddaedf        9 months ago        1.35GB
+docker4w/nsenter-dockerd         latest              2f1c802f322f        11 months ago       187kB
+```
+  - コンテナが削除済みであれば、イメージも削除可能。
+
+#### まとめ
+- `docker rm` でDickerコンテナを削除して、
+- `docker rmi` でDockerイメージを削除する。
 
 
 ## Docker Compose
@@ -263,6 +318,8 @@ c:\>
 
 ## Docker ComposeでSQL Server 2019 RC1環境を構築
 ### SQL Server 2019 RC1の動作フォルダを作成
+- 動作フォルダとして、任意のフォルダを作成する。
+
 ### SQL Server 2019 RC1のComposeファイルを作成
 - 動作フォルダに「docker-compose.yaml」を作成する。
 - 「docker-compose.yaml」にDockerコンテナを利用したサービスの設定を記述する。
