@@ -353,6 +353,7 @@ $ docker-compose up
 # 稼働状況を確認
 $ docker-compose ps
 ```
+- SSMSなどDBクライアントツールで `localhost:1433` に接続することで操作可能
 
 ### Docker Composeで起動した起動したSQL Server 2019 RC1環境を停止
 ```
