@@ -81,7 +81,7 @@ Server: Docker Engine - Community
 - Dockerドキュメント（基本コマンド）
   - https://docs.docker.com/engine/reference/commandline/docker/
 
-###  イメージの検索/取得
+###  イメージの検索・取得
 #### [docker search](https://docs.docker.com/engine/reference/commandline/search/)
 - [DockerHub](https://hub.docker.com/)に登録されたDockerイメージを検索する。
 - 例：RedisのDockerイメージを検索
