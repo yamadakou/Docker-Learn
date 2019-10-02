@@ -82,7 +82,7 @@ Server: Docker Engine - Community
   - https://docs.docker.com/engine/reference/commandline/docker/
 
 ###  イメージの検索/取得
-#### docker search
+#### [docker search](https://docs.docker.com/engine/reference/commandline/search/)
 - [DockerHub](https://hub.docker.com/)に登録されたDockerイメージを検索する。
 - 例：RedisのDockerイメージを検索
 ```
@@ -120,21 +120,24 @@ cflondonservices/redis           Docker image for running redis                 
 - [DockerHub](https://hub.docker.com/)や他のレジストリに登録されたDockerイメージを取得（ダウンロード）する。
 - 例：[Docker公式のRedis組込み済みイメージ](https://hub.docker.com/_/redis)を取得
 ```
-
 c:\>docker pull redis
 Using default tag: latest
 latest: Pulling from library/redis
-b8f262c62ec6: Pull complete                                                                                             93789b5343a5: Pull complete                                                                                             49cdbb315637: Pull complete                                                                                             2c1ff453e5c9: Pull complete                                                                                             9341ee0a5d4a: Pull complete                                                                                             770829e1df34: Pull complete                                                                                             Digest: sha256:5dcccb533dc0deacce4a02fe9035134576368452db0b4323b98a4b2ba2d3b302
+b8f262c62ec6: Pull complete
+93789b5343a5: Pull complete
+49cdbb315637: Pull complete
+2c1ff453e5c9: Pull complete
+9341ee0a5d4a: Pull complete 
+770829e1df34: Pull complete
+Digest: sha256:5dcccb533dc0deacce4a02fe9035134576368452db0b4323b98a4b2ba2d3b302
 Status: Downloaded newer image for redis:latest
-docker.io/library/redis:latest
-```
+docker.io/library/redis:latest```
 - バージョンを指定しないとデフォルトであるLatestバージョンを取得する。
 
 #### [docker images](https://docs.docker.com/engine/reference/commandline/images/)
 - Dockerコンテナの一覧を表示する。
 - 例
 ```
-
 c:\>docker images
 REPOSITORY                                 TAG                 IMAGE ID            CREATED             SIZE
 redis                                      latest              63130206b0fa        5 days ago          98.2MB
@@ -283,7 +286,6 @@ Error response from daemon: conflict: unable to delete 314918ddaedf (must be for
 
 - 「redis」のイメージを削除
 ```
-
 c:\>docker rmi redis
 Untagged: redis:latest
 Untagged: redis@sha256:5dcccb533dc0deacce4a02fe9035134576368452db0b4323b98a4b2ba2d3b302
