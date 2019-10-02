@@ -116,7 +116,7 @@ cflondonservices/redis           Docker image for running redis                 
 ```
 - 1番目の「OFFICIAL」が「[OK]」となっており、Docker公式のRedis組込み済みイメージであることが分かる。
 
-#### docker pull
+#### [docker pull](https://docs.docker.com/engine/reference/commandline/pull/)
 - [DockerHub](https://hub.docker.com/)や他のレジストリに登録されたDockerイメージを取得（ダウンロード）する。
 - 例：[Docker公式のRedis組込み済みイメージ](https://hub.docker.com/_/redis)を取得
 ```
@@ -130,7 +130,7 @@ docker.io/library/redis:latest
 ```
 - バージョンを指定しないとデフォルトであるLatestバージョンを取得する。
 
-#### docker images
+#### [docker images](https://docs.docker.com/engine/reference/commandline/images/)
 - Dockerコンテナの一覧を表示する。
 - 例
 ```
@@ -164,7 +164,7 @@ k8s.gcr.io/pause-amd64                     3.1                 da86e6ba6ca1     
 
 
 ### コンテナの起動・プロセスの確認・停止
-#### docker run
+#### [docker run](https://docs.docker.com/engine/reference/commandline/run/)
 - コンテナを起動する。
   - `-i` と `-t` のオプションを付けるとターミナルでコンテナを実行することができる。
     - `exit` を入力するとターミナルを終了し、ホストターミナルに戻るが、ターミナルを終了した場合、コンテナも停止する。
@@ -175,7 +175,7 @@ c:\>docker run --name docker-redis -d -p 6379:6379 redis
 2c7b52aaf216d93cc9c727ce8294c80dba375edd53d55a2ac80de7fb238d2d08
 ```
 
-#### docker ps
+#### [docker ps](https://docs.docker.com/engine/reference/commandline/ps/)
 - コンテナの一覧を表示する。
   - オプションを指定しない場合、稼働中のコンテナのみ表示する。
 - 例：稼働中のコンテナ一覧で、[Docker公式のRedis](https://hub.docker.com/_/redis)が起動しているか確認
@@ -189,7 +189,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
   - Redisクライアントの例
     - [RDBTools](https://rdbtools.com/)の[Redis GUI Client for Windows](https://rdbtools.com/docs/install/windows/)
 
-#### docker stop / docker kill
+#### [docker stop](https://docs.docker.com/engine/reference/commandline/stop/) / [docker kill](https://docs.docker.com/engine/reference/commandline/kill/)
 - コンテナを停止する。
 - docker stop
   - メインのコンテナ・プロセスに [`SIGTERM`](https://www.wdic.org/w/TECH/SIGTERM) を送信後、一定期間が経過したら [`SIGKILL`](https://www.wdic.org/w/TECH/SIGKILL) を送信。
@@ -210,7 +210,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 ```
 - `docker ps` で名前「docker-redis」のコンテナが停止したことが分かる。
 
-#### docker start
+#### [docker start](https://docs.docker.com/engine/reference/commandline/start/)
 - 停止したコンテナを再起動する。
 - コンテナは以前に指定したものと同じオプションで起動。
   - `-a` でアタッチすることが可能。
@@ -236,7 +236,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 - `docker ps` でDockerコンテナの稼働状況を確認する。
 
 ### コンテナの削除・イメージの削除
-#### docker rm
+#### [docker rm](https://docs.docker.com/engine/reference/commandline/rm/)
 - 動作しているコンテナを確認
 ```
 c:\>docker ps
@@ -261,7 +261,7 @@ CONTAINER ID        IMAGE                                        COMMAND        
 ```
 - 削除した「docker-redis」のコンテナが、停止しているコンテナから削除されたことが分かる。
 
-#### docker rmi
+#### [docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/)
 - 現在のコンテナとイメージの確認
 ```
 c:\>docker ps -a
