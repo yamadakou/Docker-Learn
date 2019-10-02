@@ -181,7 +181,8 @@ c:\>docker run --name docker-redis -d -p 6379:6379 redis
 
 #### [docker ps](https://docs.docker.com/engine/reference/commandline/ps/)
 - コンテナの一覧を表示する。
-  - オプションを指定しない場合、稼働中のコンテナのみ表示する。
+  - オプションを指定しない場合、稼働中のコンテナを表示する。
+  - `-p` オプションで、停止しているコンテナを表示する。
 - 例：稼働中のコンテナ一覧で、[Docker公式のRedis](https://hub.docker.com/_/redis)が起動しているか確認
 ```
 c:\>docker ps
@@ -197,7 +198,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 - コンテナを停止する。
 - docker stop
   - メインのコンテナ・プロセスに [`SIGTERM`](https://www.wdic.org/w/TECH/SIGTERM) を送信後、一定期間が経過したら [`SIGKILL`](https://www.wdic.org/w/TECH/SIGKILL) を送信。
-  - 期間の指定は-f を使用。(デフォルトは10秒)
+  - 期間の指定は `-f` を使用。(デフォルトは10秒)
 - docker kill
   - メインのコンテナ・プロセスに [`SIGKILL`](https://www.wdic.org/w/TECH/SIGKILL) を直ちに送信。
 - 例：名前「docker-redis」で起動したコンテナを停止
