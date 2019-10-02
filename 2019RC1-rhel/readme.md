@@ -131,7 +131,8 @@ b8f262c62ec6: Pull complete
 770829e1df34: Pull complete
 Digest: sha256:5dcccb533dc0deacce4a02fe9035134576368452db0b4323b98a4b2ba2d3b302
 Status: Downloaded newer image for redis:latest
-docker.io/library/redis:latest```
+docker.io/library/redis:latest
+```
 - バージョンを指定しないとデフォルトであるLatestバージョンを取得する。
 
 #### [docker images](https://docs.docker.com/engine/reference/commandline/images/)
