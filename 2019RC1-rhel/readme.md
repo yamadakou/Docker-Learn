@@ -81,8 +81,8 @@ Server: Docker Engine - Community
 - Dockerドキュメント（基本コマンド）
   - https://docs.docker.com/engine/reference/commandline/docker/
 
-###  イメージの検索・取得
-#### [docker search](https://docs.docker.com/engine/reference/commandline/search/)
+###  イメージの検索/取得
+#### docker search
 - [DockerHub](https://hub.docker.com/)に登録されたDockerイメージを検索する。
 - 例：RedisのDockerイメージを検索
 ```
@@ -116,29 +116,25 @@ cflondonservices/redis           Docker image for running redis                 
 ```
 - 1番目の「OFFICIAL」が「[OK]」となっており、Docker公式のRedis組込み済みイメージであることが分かる。
 
-#### [docker pull](https://docs.docker.com/engine/reference/commandline/pull/)
+#### docker pull
 - [DockerHub](https://hub.docker.com/)や他のレジストリに登録されたDockerイメージを取得（ダウンロード）する。
 - 例：[Docker公式のRedis組込み済みイメージ](https://hub.docker.com/_/redis)を取得
 ```
+
 c:\>docker pull redis
 Using default tag: latest
 latest: Pulling from library/redis
-b8f262c62ec6: Pull complete
-93789b5343a5: Pull complete
-49cdbb315637: Pull complete
-2c1ff453e5c9: Pull complete
-9341ee0a5d4a: Pull complete 
-770829e1df34: Pull complete
-Digest: sha256:5dcccb533dc0deacce4a02fe9035134576368452db0b4323b98a4b2ba2d3b302
+b8f262c62ec6: Pull complete                                                                                             93789b5343a5: Pull complete                                                                                             49cdbb315637: Pull complete                                                                                             2c1ff453e5c9: Pull complete                                                                                             9341ee0a5d4a: Pull complete                                                                                             770829e1df34: Pull complete                                                                                             Digest: sha256:5dcccb533dc0deacce4a02fe9035134576368452db0b4323b98a4b2ba2d3b302
 Status: Downloaded newer image for redis:latest
 docker.io/library/redis:latest
 ```
 - バージョンを指定しないとデフォルトであるLatestバージョンを取得する。
 
-#### [docker images](https://docs.docker.com/engine/reference/commandline/images/)
+#### docker images
 - Dockerコンテナの一覧を表示する。
 - 例
 ```
+
 c:\>docker images
 REPOSITORY                                 TAG                 IMAGE ID            CREATED             SIZE
 redis                                      latest              63130206b0fa        5 days ago          98.2MB
@@ -168,7 +164,7 @@ k8s.gcr.io/pause-amd64                     3.1                 da86e6ba6ca1     
 
 
 ### コンテナの起動・プロセスの確認・停止
-#### [docker run](https://docs.docker.com/engine/reference/commandline/run/)
+#### docker run
 - コンテナを起動する。
   - `-i` と `-t` のオプションを付けるとターミナルでコンテナを実行することができる。
     - `exit` を入力するとターミナルを終了し、ホストターミナルに戻るが、ターミナルを終了した場合、コンテナも停止する。
@@ -179,10 +175,9 @@ c:\>docker run --name docker-redis -d -p 6379:6379 redis
 2c7b52aaf216d93cc9c727ce8294c80dba375edd53d55a2ac80de7fb238d2d08
 ```
 
-#### [docker ps](https://docs.docker.com/engine/reference/commandline/ps/)
+#### docker ps
 - コンテナの一覧を表示する。
-  - オプションを指定しない場合、稼働中のコンテナを表示する。
-  - `-p` オプションで、停止しているコンテナを表示する。
+  - オプションを指定しない場合、稼働中のコンテナのみ表示する。
 - 例：稼働中のコンテナ一覧で、[Docker公式のRedis](https://hub.docker.com/_/redis)が起動しているか確認
 ```
 c:\>docker ps
@@ -194,11 +189,11 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
   - Redisクライアントの例
     - [RDBTools](https://rdbtools.com/)の[Redis GUI Client for Windows](https://rdbtools.com/docs/install/windows/)
 
-#### [docker stop](https://docs.docker.com/engine/reference/commandline/stop/) / [docker kill](https://docs.docker.com/engine/reference/commandline/kill/)
+#### docker stop / docker kill
 - コンテナを停止する。
 - docker stop
   - メインのコンテナ・プロセスに [`SIGTERM`](https://www.wdic.org/w/TECH/SIGTERM) を送信後、一定期間が経過したら [`SIGKILL`](https://www.wdic.org/w/TECH/SIGKILL) を送信。
-  - 期間の指定は `-f` を使用。(デフォルトは10秒)
+  - 期間の指定は-f を使用。(デフォルトは10秒)
 - docker kill
   - メインのコンテナ・プロセスに [`SIGKILL`](https://www.wdic.org/w/TECH/SIGKILL) を直ちに送信。
 - 例：名前「docker-redis」で起動したコンテナを停止
@@ -215,7 +210,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 ```
 - `docker ps` で名前「docker-redis」のコンテナが停止したことが分かる。
 
-#### [docker start](https://docs.docker.com/engine/reference/commandline/start/)
+#### docker start
 - 停止したコンテナを再起動する。
 - コンテナは以前に指定したものと同じオプションで起動。
   - `-a` でアタッチすることが可能。
@@ -241,7 +236,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 - `docker ps` でDockerコンテナの稼働状況を確認する。
 
 ### コンテナの削除・イメージの削除
-#### [docker rm](https://docs.docker.com/engine/reference/commandline/rm/)
+#### docker rm
 - 動作しているコンテナを確認
 ```
 c:\>docker ps
@@ -266,7 +261,7 @@ CONTAINER ID        IMAGE                                        COMMAND        
 ```
 - 削除した「docker-redis」のコンテナが、停止しているコンテナから削除されたことが分かる。
 
-#### [docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/)
+#### docker rmi
 - 現在のコンテナとイメージの確認
 ```
 c:\>docker ps -a
@@ -288,6 +283,7 @@ Error response from daemon: conflict: unable to delete 314918ddaedf (must be for
 
 - 「redis」のイメージを削除
 ```
+
 c:\>docker rmi redis
 Untagged: redis:latest
 Untagged: redis@sha256:5dcccb533dc0deacce4a02fe9035134576368452db0b4323b98a4b2ba2d3b302
@@ -357,12 +353,28 @@ $ docker-compose up
 # 稼働状況を確認
 $ docker-compose ps
 ```
-- SSMSなどDBクライアントツールで `localhost:1433` に接続することで操作可能
+- SSMSなどDBクライアントツールで `localhost:14330` に接続することで操作可能
+  - 接続方法などの参考
+    - https://docs.microsoft.com/ja-jp/sql/linux/sql-server-linux-configure-docker?view=sql-server-linux-ver15#connect-and-query
+  - SSMS（SQL Server Management Studio）
+    - 以下からダウンロード可能
+      - https://docs.microsoft.com/ja-jp/sql/ssms/download-sql-server-management-studio-ssms
+  - ADS（Azure Data Studio）
+    - macOSやLinuxにも対応したMS製DBツール
+    - 以下からダウンロード可能
+      - https://docs.microsoft.com/ja-jp/sql/azure-data-studio/what-is
 
-### Docker Composeで起動した起動したSQL Server 2019 RC1環境を停止
+### Docker Composeで起動したSQL Server 2019 RC1環境を停止
 ```
 $ docker-compose stop
 
 # 稼働状況を確認
 $ docker-compose ps
 ```
+
+### Docker Composeで停止した起動したSQL Server 2019 RC1環境を再開
+
+### DBの復元
+- ダウンロードした AdventureWorks2017.bak ファイルを、Docker Compose の起動ディレクトリ配下の\mssql\dataフォルダ内に配置
+- SSMSで `localhost:14330` に接続する。
+- 
