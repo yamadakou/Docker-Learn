@@ -10,12 +10,6 @@
 - Dockerドキュメント「WindowsにDocker Desktopをインストールする」
   - https://docs.docker.com/docker-for-windows/install/
 
-- 「AdventureWorks2017.bak」の入手先
-  - MS Doc
-    - https://docs.microsoft.com/ja-jp/sql/samples/adventureworks-install-configure?view=sql-server-2017
-  - GitHub
-    - https://github.com/Microsoft/sql-server-samples/releases/tag/adventureworks
-
 ## Dockerのインストール
 ### 事前準備
 #### CPU仮想化の確認
@@ -313,8 +307,10 @@ docker4w/nsenter-dockerd         latest              2f1c802f322f        11 mont
 - コマンドを１つ実行するだけで、DockerファイルとComposeファイルに設定した全てのサービスを作成・起動することができる。
   - 1つのコンテナの場合も利用できる。
 - Docker Desctopには、Docker Composeが同梱されているため、追加のインストールは不要。
-- 詳細は、Docker Composeの日本語ドキュメントを参照
-  - http://docs.docker.jp/compose/toc.html
+- 詳細はDocker Composeのドキュメントを参照
+  - https://docs.docker.com/compose/
+  - 日本語訳
+    - http://docs.docker.jp/compose/toc.html
 
 ## Docker ComposeでSQL Server 2019 RC1環境を構築
 ### SQL Server 2019 RC1の動作フォルダを作成
@@ -340,7 +336,7 @@ docker4w/nsenter-dockerd         latest              2f1c802f322f        11 mont
         # - MSSQL_PID=Enterprise
         # - MSSQL_PID=EnterpriseCore
         ports:
-        - 1433:1433
+        - 14330:1433
         volumes: # Mounting a volume does not work on Docker for Mac
         - ./mssql/log:/var/opt/mssql/log
         - ./mssql/data:/var/opt/mssql/data
@@ -353,7 +349,7 @@ $ docker-compose up
 # 稼働状況を確認
 $ docker-compose ps
 ```
-- SSMSなどDBクライアントツールで `localhost:14330` に接続することで操作可能
+- SSMSなどDBクライアントツールで `localhost,14330` に接続することで操作可能
   - 接続方法などの参考
     - https://docs.microsoft.com/ja-jp/sql/linux/sql-server-linux-configure-docker?view=sql-server-linux-ver15#connect-and-query
   - SSMS（SQL Server Management Studio）
@@ -373,8 +369,20 @@ $ docker-compose ps
 ```
 
 ### Docker Composeで停止した起動したSQL Server 2019 RC1環境を再開
+```
+$ docker-compose start
 
-### DBの復元
-- ダウンロードした AdventureWorks2017.bak ファイルを、Docker Compose の起動ディレクトリ配下の\mssql\dataフォルダ内に配置
-- SSMSで `localhost:14330` に接続する。
-- 
+# 稼働状況を確認
+$ docker-compose ps
+```
+### DBの復元（SSMSを使用）
+- ダウンロードした「AdventureWorks2017.bak」ファイルを、Docker Compose の起動ディレクトリ配下の `\mssql\data` フォルダ内に配置
+  - 「AdventureWorks2017.bak」の入手先
+    - MS Doc
+      - https://docs.microsoft.com/ja-jp/sql/samples/adventureworks-install-configure?view=sql-server-2017
+    - GitHub
+      - https://github.com/Microsoft/sql-server-samples/releases/tag/adventureworks
+- SSMSで `localhost,14330` に接続する。
+- 以下を参考に、SSMSでオブジェクトエクスプローラーの「データベース」を右クリックしたメニューから「データベースの復元」をクリックし、「データベースの復元ダイアログ」にて「AdventureWorks2017.bak」を復元する。
+  - https://docs.microsoft.com/ja-jp/sql/relational-databases/backup-restore/restore-a-database-to-a-new-location-sql-server
+- 復元したDB「AdventureWorks2017」に `SELECT` などで動作を確認する。
