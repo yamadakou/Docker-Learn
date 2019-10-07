@@ -326,9 +326,9 @@ docker4w/nsenter-dockerd         latest              2f1c802f322f        11 mont
 
     services:
       mssql:
-          image: mcr.microsoft.com/mssql/rhel/server:2019-RC1
-          container_name: 'mssql2019-rc1-rhel'
-          environment:
+        image: mcr.microsoft.com/mssql/rhel/server:2019-RC1
+        container_name: 'mssql2019-rc1-rhel'
+        environment:
           - MSSQL_SA_PASSWORD=<saユーザーのパスワード(SQL Serverのパスワードルールに従うこと）>
           - ACCEPT_EULA=Y
           - MSSQL_PID=Developer # default: Developer
@@ -336,9 +336,9 @@ docker4w/nsenter-dockerd         latest              2f1c802f322f        11 mont
           # - MSSQL_PID=Standard
           # - MSSQL_PID=Enterprise
           # - MSSQL_PID=EnterpriseCore
-          ports:
-          - 14330:1433
-          volumes: # Mounting a volume does not work on Docker for Mac
+        ports:
+          - 1433:1433 # <ホスト側ポート番号>:<コンテナ側ポート番号>
+        volumes: # Mounting a volume does not work on Docker for Mac
           - ./mssql/log:/var/opt/mssql/log
           - ./mssql/data:/var/opt/mssql/data
     ```
