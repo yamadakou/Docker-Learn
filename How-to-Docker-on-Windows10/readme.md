@@ -1,7 +1,7 @@
 # Windows 10 Pro/EntでDockerを動かす方法
 
 ## 目的
-- Windows10でのDocker環境を構築し、基本的なコマンドを使ってGitHubのオフィシャル公式コンテナイメージを動かす。
+- Windows 10 Pro/EntにDocker環境を構築し、基本的なコマンドを使ってGitHubのオフィシャル公式コンテナイメージを動かす方法を学習する。
 
 ## 参考
 - Dockerドキュメント「WindowsにDocker Desktopをインストールする」
