@@ -39,7 +39,7 @@
       mssql:
           image: mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
           container_name: 'mssql2019-GA-ubuntu'
-        environment:
+          environment:
           - MSSQL_SA_PASSWORD=<saユーザーのパスワード(SQL Serverのパスワードルールに従うこと）>
           - ACCEPT_EULA=Y
           - MSSQL_PID=Developer # default: Developer
@@ -47,9 +47,9 @@
           # - MSSQL_PID=Standard
           # - MSSQL_PID=Enterprise
           # - MSSQL_PID=EnterpriseCore
-        ports:
+          ports:
           - 14331:1433 # <ホスト側ポート番号>:<コンテナ側ポート番号>
-        volumes: # Mounting a volume does not work on Docker for Mac
+          volumes: # Mounting a volume does not work on Docker for Mac
           - ./mssql/log:/var/opt/mssql/log
           - ./mssql/data:/var/opt/mssql/data
     ```
