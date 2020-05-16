@@ -37,8 +37,8 @@
 
     services:
       mssql:
-          image: mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
-          container_name: 'mssql2019-GA-ubuntu'
+          image: mcr.microsoft.com/mssql/server:2019-latest
+          container_name: 'mssql2019-latest'
         environment:
           - MSSQL_SA_PASSWORD=<saユーザーのパスワード(SQL Serverのパスワードルールに従うこと）>
           - ACCEPT_EULA=Y
