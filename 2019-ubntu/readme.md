@@ -39,19 +39,19 @@
       mssql:
           image: mcr.microsoft.com/mssql/server:2019-latest
           container_name: 'mssql2019-latest'
-        environment:
-          - MSSQL_SA_PASSWORD=<saユーザーのパスワード(SQL Serverのパスワードルールに従うこと）>
-          - ACCEPT_EULA=Y
-          - MSSQL_PID=Developer # default: Developer
-          # - MSSQL_PID=Express
-          # - MSSQL_PID=Standard
-          # - MSSQL_PID=Enterprise
-          # - MSSQL_PID=EnterpriseCore
-        ports:
-          - 14331:1433 # <ホスト側ポート番号>:<コンテナ側ポート番号>
-        volumes: # Mounting a volume does not work on Docker for Mac
-          - ./mssql/log:/var/opt/mssql/log
-          - ./mssql/data:/var/opt/mssql/data
+          environment:
+            - MSSQL_SA_PASSWORD=<saユーザーのパスワード(SQL Serverのパスワードルールに従うこと）>
+            - ACCEPT_EULA=Y
+            - MSSQL_PID=Developer # default: Developer
+            # - MSSQL_PID=Express
+            # - MSSQL_PID=Standard
+            # - MSSQL_PID=Enterprise
+            # - MSSQL_PID=EnterpriseCore
+          ports:
+            - 14331:1433 # <ホスト側ポート番号>:<コンテナ側ポート番号>
+          volumes: # Mounting a volume does not work on Docker for Mac
+            - ./mssql/log:/var/opt/mssql/log
+            - ./mssql/data:/var/opt/mssql/data
     ```
 
 ### 作成したComposeファイルでDocker Composeを起動
